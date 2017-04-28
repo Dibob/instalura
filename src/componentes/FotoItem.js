@@ -21,21 +21,30 @@ class FotoInfo extends Component {
     return (
       <div className="foto-info">
         <div className="foto-info-likes">
-          <a href="#">alots_ssa</a>,
-          <a href="#">rafael_rollo</a>
+          {
+            this.props.foto.likers.map(liker => {
+              return <a href="#">{ liker.login },</a>
+            })
+          }
           curtiram
         </div>
 
         <p className="foto-info-legenda">
           <a className="foto-info-autor">autor </a>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, illo?
+          { this.props.foto.comentario }
         </p>
 
         <ul className="foto-info-comentarios">
-          <li className="comentario">
-            <a className="foto-info-autor">seguidor </a>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem ad, molestiae.
-          </li>
+            { 
+              this.props.foto.comentarios.map(comentario => {
+                return (
+                  <li className="comentario">
+                    <a className="foto-info-autor">{ comentario.login }</a>
+                    { comentario.texto }
+                  </li>
+                );
+              })
+            }
         </ul>
       </div>
     );
@@ -62,7 +71,7 @@ export default class FotoItem extends Component {
       <div className="foto">
         <FotoHeader foto={ this.props.foto } />
         <img alt="foto" className="foto-src" src={ this.props.foto.urlFoto } />
-        <FotoInfo />
+        <FotoInfo foto={ this.props.foto } />
         <FotoAtualizacoes />
       </div>
     );
